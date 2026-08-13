@@ -18,14 +18,22 @@ Repositorio del curso para almacenar laboratorios, ejercicios de clase y scripts
 Ejemplo de un programa básico en Python:
 
 ```python
-opcion = int(input("Ingrese un número (1-3): "))
+def mostrar_mensaje(opcion):
+    if opcion == 1:
+        print("Bienvenidos a Análisis de Algoritmos")
+    elif opcion == 2:
+        print("Hola, mundo")
+    elif opcion == 3:
+        print("Ups, creo que me equivoqué")
+    else:
+        print("Opción no válida")
 
-if opcion == 1:
-    print("Bienvenidos a Análisis de Algoritmos")
-elif opcion == 2:
-    print("Hola, mundo")
-elif opcion == 3:
-    print("Ups, creo que me equivoqué")
-else:
-    print("Opción no válida")
+
+def main():
+    opcion = int(input("Ingrese un número (1-3): "))
+    mostrar_mensaje(opcion)
+
+
+if __name__ == "__main__":
+    main()
 ```
