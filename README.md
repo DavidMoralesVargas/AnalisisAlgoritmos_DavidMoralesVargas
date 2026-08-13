@@ -1,9 +1,9 @@
 # Curso de Análisis de Algoritmos
 
-**Estudiante:** David Morales Vargas 
-**Curso:** Análisis de Algoritmos - Virtual
-**Grupo:** 190304006-1 
-**Profesor:** Santiago Suárez Cortés 
+- **Estudiante:** David Morales Vargas
+- **Curso:** Análisis de Algoritmos - Virtual
+- **Grupo:** 19
+- **Profesor:** Nombre del Profesor
 
 Repositorio del curso para almacenar laboratorios, ejercicios de clase y scripts de benchmarks utilizados durante el semestre.
 
