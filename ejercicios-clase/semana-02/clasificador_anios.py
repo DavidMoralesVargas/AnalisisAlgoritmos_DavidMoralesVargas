@@ -64,8 +64,11 @@ def main() -> None:
     
     print("\n--- RESUMEN ---")
     
+    print(f"Años ingresados: {anios}")
+
     if bisiestos_encontrados:
         print(f"Los años bisiestos encontrados son: {bisiestos_encontrados}")
+        print(f"La cantidad de años bisiesto: {len(bisiestos_encontrados)}")
     else:
         print("No se encontró ningún año bisiesto en la lista.")
  
