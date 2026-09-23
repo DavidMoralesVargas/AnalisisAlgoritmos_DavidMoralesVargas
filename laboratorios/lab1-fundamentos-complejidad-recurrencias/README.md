@@ -105,3 +105,89 @@ Cómo se puede ver en la gráfica, el caso C terminó siendo el peor caso, el ca
 La predicción que se realizó para el ejercicio fue que, el peor caso posible iba a ser el Caso C por la naturaleza de que se debe pasar elementos tras elementos ejecutando los ciclos interno y externo. En la práctica, esta predicción se cumplió correctamente, ya que las métricas lanzadas por el script coinciden con que el mayor esfuerzo de la máquina (por comparaciones) y el mayor tiempo que se demoró la ejecución en todos los casos es superior que el caso A y B.
 
 ---
+
+## Parte 4 — Complejidad de merge sort e insertion sort: cálculo y validación
+
+Código de esta parte: [código de la Parte 4](parte4_complejidad.py) (usa [`merge_sort`](algoritmos.py) agregado a `algoritmos.py`)
+
+### 4.1 Cálculo teórico
+
+**Recurrencia de merge sort:** T(n) = 2T(n/2) + Θ(n)
+
+Nos ayuda a medir el tiempo que puede demorar la ejecución de un algoritmo. En este caso, dicho tiempo total se representa con T(n), siendo n una variable dependiente, que es el tamaño de la entrada de la lista, y es directamente proporcional al tiempo de ejecución. Tiene los siguientes elementos:
+
+- **2T(n/b):** T(n/b) se multiplica por dos porque es la cantidad de subproblemas que se dividirá el problema original. Esto quiero decir que, como el problema original (la lista a ordenar) será dividida en dos para ordenar sus partes por separados entonces por eso se debe multiplicar por dos. a = 2.
+- **T(n/2):** Ya sabemos que el problema para el caso de merge soft se va a dividir en 2, eso quiere decir que, cada subproblema tiene la mitad de tamaño que tendrá el problema original. Por eso n/2. b = 2.
+- **Θ(n):** Este representa el costo de unir todos los subproblemas de nuevo en el problema original (que se le llama "merge"). Como cada subproblema ya está ordenado, para volverlos a unir solo se requiere una pasada lineal sobre los n elementos, sin operaciones adicionales.
+
+**Resolución por el método de sustitución:**
+
+Adivinamos la formula de la solución. Suponemos que el tiempo de ejecución está acotado superiormente con nlogn. El planteamiento queda: T(n) ≤ c nlogn para una constante c > 0 y n>= n_0
+
+Realizamos la sustitución cuando se cumple un subproblema más pequeño, específicamente n/2. Entonces se reemplaza T(n/2) y queda la conjetura de la siguiente forma:
+
+T(n) ≤ 2(c (n/2)log(n/2)) + cn
+
+Ahora se realiza la simplificación de la función:
+
+- Se cancelan el dos multiplicando con el dos dividiendo: T(n) ≤ cnlog(n/2) + cn
+- Aplicamos la propiedad de los logaritmos que dice que (log(a/b) = loga – logb), y queda: T(n) ≤ cn(logn – log2) + cn
+- Como sabemos que log_2 2 = 1 entonces tenemos que: T(n) ≤ cn(logn – 1) + cn => T(n) ≤ cn logn – cn + cn
+- Se realiza la resta de los términos iguales: T(n) ≤ cn logn
+
+Resolviendo lo anterior, se puede notar que tiene la misma forma de la hipótesis que se realizó. Entonces queda demostrado que T(n) = O(n logn)
+
+**Insertion sort línea a línea:**
+
+```python
+for i in range(1, len(arreglo)):         # c1, se ejecuta n veces
+    clave = arreglo[i]                   # c2, se ejecuta n - 1 veces
+    j = i - 1                            # c3, se ejecuta n - 1 veces
+
+    while j >= 0:                        # c4, se ejecuta sum(t_i + 1) desde i=1 hasta n-1
+        comparaciones += 1               # c5, se ejecuta sum(t_i) desde i=1 hasta n-1
+        if arreglo[j] < clave:           # c6, se ejecuta sum(t_i) desde i=1 hasta n-1
+            arreglo[j + 1] = arreglo[j]  # c7, se ejecuta sum(t_i) desde i=1 hasta n-1
+            j -= 1                       # c8, se ejecuta sum(t_i) desde i=1 hasta n-1
+        else:
+            break                        # c9, se ejecuta a lo sumo n - 1 veces (una vez por cada corte anticipado)
+
+    arreglo[j + 1] = clave               # c10, se ejecuta n - 1 veces
+```
+
+Sumando todos los términos agrupados, el tiempo total es:
+
+**Complejidad algorítmica esperada:**
+
+| Algoritmo | Mejor caso | Peor caso | Caso promedio |
+|---|---|---|---|
+| Insertion sort | Θ(n) | Θ(n²) | Θ(n²) |
+| Merge sort | Θ(n log n) | Θ(n log n) | Θ(n log n) |
+
+Para el caso de insertion soft: En el Peor y Caso promedio se ve una complejidad de n**2 ya que en ambos casos se deben realizar los dos ciclos del agoritmo, por lo que es recorrido y desplazamiento, y para el Mejor Caso como en su mayoria ya está organizado entonces la ejecución es más que todo por recorrido entonces solo se ejecuta el ciclo externo y tiene complejidad de n.
+
+Para el caso de Merge Soft, la complejidad dependiendo del caso es indiferente, ya que al ser un algoritmo diferente no depende de la forma de la lista si no de la división que hace en los subproblemas y la organización, por lko que la complejidad en realidad nunca cambia.
+
+### 4.2 Validación experimental
+
+![Tiempo vs. tamaño de entrada — Insertion sort vs. Merge sort](graficas/parte4_tiempo.png)
+
+**Conclusión para algoritmos en Tamiza:**
+
+A partir de la gráfica evidenciada se puede concluir que el mejor algoritmo para el software de Tamiza es Merge Sort. Al observar las curvas que se presentan a medida que crece la entrada n, la línea de Insert Sort comienza a ir hacía arriba de forma muy pronunciada, con un crecimiento excesivo, lo que evidencia la naturaleza de la complejidad algorítmica de n**2. En cambio, la línea de Merge Sort se mantiene bastante pegada y cercana a lo que es le eje X, lo que demuestra que apenas tiene un crecimiento perceptible a medida que el tamaño de la entrada n de la lista va creciendo. Para el 1.200.000 de registros que maneja Tamiza, el algoritmo que maneja mejor la cantidad de elementos y la ventana indiscutible de 4 horas es Merge Sort, a comparación de Insertion Sort que requiere un tiempo mucho mayor por la cantidad de la entrada, y hace que se genere los fallos ya mencionados.
+
+**Comprobación de complejidades en la sesión 4.1:**
+
+El comportamiento que representa la grafica coincide con la complejidad algorítmica presentada en la sesión 4.1. En la prueba realizada, el crecimiento de la curva de Insertion Sort confirma un crecimiento cuadrático para valores aleatorios, comportamiento que teóricamente se calculo con O(n**2). Por otro lado, se ve como Merge Sort no tiene un crecimiento tan brusco y es bastante imperceptible, reflejando su complejidad de O(nlogn), que escala de manera mucho más eficiente sin importar el tamaño de la entrada n.
+
+Por otro lado, se puede observar que para entradas más pequeñas, como el tamaño n igual a 100 o 200 que se puede ver en la gráfica, ambas curvas parecen ser parecidas, pero esto tiene una pero oculto: Merge Sort gasta más en memoria (overhead) por las llamadas recursivas, entonces el uso de ese algoritmo pesa más cuando se tiene un n muy pequeña. A medida que va subiendo la entrada n entonces se ve la ventaja de Merge Sort a comparación de Insertion Sort, siendo que ese gasto de memoria extra es marginal si se usa contra listas con longitud enorme, como se ve con 1.200.000 registros de Tamiza.
+
+### 4.3 — Concepto técnico a la Secretaría de Salud
+
+Tras realizar el análisis de la plataforma de Tamiza y el problema que está teniendo con el uso actual de su algoritmo y su innegociable ventana de 4 horas para su ejecución, recomiendo cambiar la implementación de Insertion Sort por Merge Sort. Esta decisión se debe a qué, la forma de entrada de los datos es bastante impredecible dado que la lista a ordenar puede llegar de tres formas diferentes: Con un orden aleatorio, casi ordenado y orden inverso. Esto hace que el algoritmo actual (Insertion Sort) en tiempos de ejecución se degrade de forma severa con base al desorden que llegue de los datos. En cambio, Merge Sort es más estable para casos con este volumen, siendo que la estructura que aplica no cambia y garantiza que el tiempo de ejecución sea predecible, con un O(n logn) que brinda que al sistema le lleguen los datos sin importar que.
+
+Para medir el impacto del algoritmo, se extrapola el comportamiento en ambas situaciones hacia el volumen real, que son los 1.200.000 registros. Durante las pruebas que se realizaron con ambos algoritmos, en las gráficas se determinó que Insertion Sort tardó alrededor de 2.8 segundos para ordenar la lista aleatoria con una entrada n igual a 6400 registros. Si tomamos 1.200.000 y lo dividimos entre 6400 obtendremos 187.5, y debido al crecimiento cuadrático que se demostró que tenía Insertion Sort entonces se puede llegar a ver que 187.5**2 que da 35.156.25, y si eso lo multiplicamos por 2,8 segundos da un total de 98,437 segundos totales, y al dividirlo por 3600 da un resultado final de 27, 35 horas estimadas que tardaría el algoritmo de Insertion Sort en realizar todo el procedimiento con los registros reales de Tamiza, lo cual ya vemos que ni de cerca se acerca a la ventana de 4 horas que tienen actualmente. Por el contrario, Merge Sort procesó los 6400 registros en milésimas de segundo (0.02s aproximadamente), por lo que procesar el tamaño de 1.200.000 registros de Tamiza sería un trabajo de cuestión de segundos, lo que este algoritmo cabe perfectamente en la ventana de tiempo.
+
+Con base a los datos, es poco aconsejable realizar una inversión de infraestructura para mejorar el doble de velocidad para el algoritmo. Como se ve en la línea naranja de la gráfica, el cuello de botella se genera por la naturaleza del algoritmo más por el hardware donde está corriendo. Si se mejora un servidor al doble de velocidad para un tamaño de entrada n igual a 6400 pasaría de un tiempo de ejecución de 2.8 a 1.4, pero si duplicamos esa entrada a 12800 entonces el trabajo del ordenamiento se cuadruplica por la naturaleza de la complejidad algorítmica. Esto no es cuestión de mejorar el hardware, sino que hacer más eficiente el algoritmo con base al tiempo frente al crecimiento de los datos que le llegan.
+
+También para esto no se puede hablar solo de tiempo, sino que se pueden generar más inconvenientes por la memoria extra que usa el algoritmo de Merge Sort a comparación de Insertion Sort. Por la naturaleza el algoritmo, Merge Sort genera más memoria al tener que usar la recursividad para la ejecución y eso es memoria adicional que el servidor debe usar para realizar el ordenamiento, más, sin embargo, es costo de memoria es irrelevante por el beneficio que nos da este último. Ya se comentó cuando podría tardar Insertion Sort frente a 1,200.000, cosa que, a comparación de la memoria que se debe guardar para Merge Sort el sacrifico es marginal y es funcional.
