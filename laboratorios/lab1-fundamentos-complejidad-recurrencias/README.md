@@ -64,3 +64,44 @@ Por todo lo anterior, y más allá del tiempo que el servidor va a gastar en la 
 
 ---
 
+## Parte 3 — Peor caso, mejor caso y caso promedio, demostrados en Python
+
+Código de esta parte: [código de la Parte 3](parte3_casos.py)
+
+### 3.1 Explicación
+
+**Definición de casos** (implementadas mediante [`insertion_sort`](algoritmos.py) sobre los lotes generados en [`datos.py`](datos.py)):
+
+- **Mejor caso:** La mejor entrada para un algoritmo de Insertion Soft. Ocurre cuando la entrada de registros viene, en su gran mayoría, ya ordenado y solo habiendo que ordenar unos pocos registros. Entonces el trabajo es lineal por parte del ciclo externo, y el ciclo interno en mínimas ocasiones se ejecuta.
+- **Caso promedio:** Un caso donde los registros vienen de forma aleatorio, siendo este el caso más normal que se puede ocurrir. Teóricamente, viniendo los registros en promedio desordenados entonces dependiendo el tamaño n de entrada de datos tiene como consecuencia n/2 (la mitad) de veces que se ejecutaría el ciclo interno de Insertion Doft.
+- **Peor caso:** La peor entrada posible para un algoritmo de ordenamiento de Insertion Soft, ya que, el ordenamiento que se supone que debe tener los registros (digamos que de menor a mayor) tiene un orden inverso al que se supone que debería estar (quiere decir, de mayor a menor). Esto tiene como consecuencia que el algoritmo de ordenamiento deba recorrer toda la lista de registros en su ciclo externo y por cada elemento también deba recorrer el ciclo interno. Computacionalmente más caro y demorado que los otros dos casos.
+
+**¿Cuál caso usar para decidir si el algoritmo entra a producción?**
+
+R/ Teniendo en cuenta las restricciones proporcionadas, la longitud de los registros y los casos posibles que pueden llegar dichos resultados me inclinaría por tomar el Caso C – Orden Inverso para decidir si entra a producción. Esto se debe a que, nos dan la posibilidad innegable de que los registros pueden llegar a ser así (no es una teoría, es la realidad), con una ventana tan pequeña de tiempo y haciendo el trabajo con datos tan sensibles como lo son registros médicos, que por pequeñas equivocaciones la salud de personas puede estar involucradas, entonces habrá que tomar como referencia la peor forma en la que pueden llegar los datos para asegurar una calidad en el servicio optima, sin fallos. Así, asegurando la calidad de servicio en el peor caso, entonces también con los casos promedio y mejor caso también se podrán trabajar sin problema.
+
+**Predicción antes de medir (escenarios de Tamiza para insertion sort):**
+
+El escenario de plataforma Tamiza nos concede tres posibles casos que puede llegar el 1.200.000 de registros al día. Los casos son:
+
+- **Caso A:** Es un orden aleatorio, que también podemos llamar Promedio, ya que no hay una forma específica en la que los registros pueden llegar ya que lo hacen en el orden de laboratorio. Esto es un caso ni tan bueno, ni tan malo, lo que puede pasar es que los registros tengan que recorrerse la mitad del tamaño, que en este caso es 1.200.000 registros.
+- **Caso B:** Los registros llegan en un orden casi perfecto. En su mayoría, ya todos están ordenados y hay que realizar el recorrido en pocos elementos del día anterior, lo que quiere decir un recorrido más bien lineal de toda la lista. Este es el mejor caso que puede aparecer.
+- **Caso C:** El peor caso posible con el que puede llegar los registros, y un posible candidato perfecto a la ineficiencia del algoritmo. Los registros al estar en un orden inverso nos obligan a ordenarlo uno a uno, por lo que el recorrido y el desplazamiento de los elementos se hacen para cada uno de ellos. Es el peor caso.
+
+### 3.2 Demostración experimental
+
+![Comparaciones vs. tamaño de entrada](graficas/parte3_comparaciones.png)
+
+![Tiempo vs. tamaño de entrada](graficas/parte3_tiempo.png)
+
+**¿Qué escenario resultó siendo el peor, el mejor y cuál se aproxima más al promedio?**
+
+Cómo se puede ver en la gráfica, el caso C terminó siendo el peor caso, el caso B es el más cercano al promedio y el caso A terminó siendo el mejor caso posible. Esto respaldando la teoría:
+
+- **Caso C:** Para el caso donde se debe ordenar todo el algoritmo por el orden inverso se necesitó de más de 20 millones de comparaciones para un n igual a 6400, y entre todas esas comparaciones la maquina tardó casi 6 segundos en ejecutarlo por completo.
+- **Caso B:** Para el caso promedio, como viene en un orden aleatorio, entonces el ordenamiento se debe hacer con varios de los elementos de la lista, lo que da un total de comparaciones de más de 10 millones y un total de casi 3 segundos. Como se mencionó anteriormente, el número de desplazamientos es de n/2, por lo que cumple correctamente.
+- **Caso A:** La mejor opción para ordenar, ya que vienen en un 98% ordenados todos los registros. Para este caso, solo se necesito de poco más de 10 mil comparaciones y menos de un segundo de ejecución. Efectivamente se puede ver, que, aunque la n sigue siendo la misma, la cantidad de operaciones internas disminuye tanto que no hace un gasto tan exagerado.
+
+La predicción que se realizó para el ejercicio fue que, el peor caso posible iba a ser el Caso C por la naturaleza de que se debe pasar elementos tras elementos ejecutando los ciclos interno y externo. En la práctica, esta predicción se cumplió correctamente, ya que las métricas lanzadas por el script coinciden con que el mayor esfuerzo de la máquina (por comparaciones) y el mayor tiempo que se demoró la ejecución en todos los casos es superior que el caso A y B.
+
+---
