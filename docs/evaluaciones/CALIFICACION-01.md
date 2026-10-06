@@ -9,11 +9,11 @@
 |---|---|
 | Corrección conceptual | 17 / 25 |
 | Calidad de la explicación teórica | 18 / 25 |
-| Corrección de la implementación | 17 / 20 |
+| Corrección de la implementación | 18 / 20 |
 | Calidad del análisis de las gráficas | 13 / 20 |
 | Documentación y organización del informe | 9 / 10 |
-| **Total** | **74 / 100** |
-| **Nota (0–5)** | **3.70** |
+| **Total** | **75 / 100** |
+| **Nota (0–5)** | **3.75** |
 
 ## 1. Corrección conceptual (17 / 25)
 **Lo que hizo bien:**
@@ -38,7 +38,7 @@
 - En la sustitución faltan el caso base y la constante que hace que la hipótesis se cumpla.
 - En el análisis línea a línea de insertion sort se listan los conteos, pero la frase "el tiempo total es:" queda sin resultado. Falta sumar y concluir `n²` y `n`.
 
-## 3. Corrección de la implementación (17 / 20)
+## 3. Corrección de la implementación (18 / 20)
 **Lo que hizo bien:**
 - `insertion_sort` y `merge_sort` ordenan bien de mayor a menor, no cambian la lista recibida, cuentan comparaciones entre elementos y no usan `sorted()` ni `sort()`. La mezcla de merge sort es propia y recursiva.
 - Los tres generadores dan listas con valores distintos, del tamaño pedido, y los aleatorios usan semilla.
@@ -46,7 +46,6 @@
 
 **Lo que puede mejorar:**
 - Las funciones `main` no tienen *docstring*.
-- Hay detalles de PEP 8: espacios sobrantes al final de línea y falta de línea final en los archivos.
 
 ## 4. Calidad del análisis de las gráficas (13 / 20)
 **Lo que hizo bien:**
