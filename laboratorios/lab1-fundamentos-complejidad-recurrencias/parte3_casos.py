@@ -117,6 +117,16 @@ def graficar_tiempo(
 
 
 def main() -> None:
+    """Ejecuta la Parte 3 completa: mide los tres escenarios y grafica los resultados.
+
+    Crea la carpeta de graficas si no existe, mide tiempo y comparaciones
+    de insertion_sort sobre los tres escenarios (A, B y C) para todos los
+    tamanos en TAMANOS, y genera las dos graficas correspondientes.
+
+    Returns:
+        None. Imprime el progreso por consola y guarda las graficas en disco.
+    """
+    
     CARPETA_GRAFICAS.mkdir(parents=True, exist_ok=True)
 
     resultados = medir()

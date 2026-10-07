@@ -79,6 +79,16 @@ def graficar(tiempos: dict[str, list[float]], carpeta: Path) -> None:
 
 
 def main() -> None:
+    """Ejecuta la Parte 4 completa: mide ambos algoritmos y grafica los resultados.
+
+    Crea la carpeta de graficas si no existe, mide el tiempo de
+    insertion_sort y merge_sort sobre el escenario aleatorio para todos
+    los tamanos en TAMANOS, y genera la grafica comparativa.
+
+    Returns:
+        None. Imprime el progreso por consola y guarda la grafica en disco.
+    """
+    
     CARPETA_GRAFICAS.mkdir(parents=True, exist_ok=True)
 
     tiempos = medir()
