@@ -50,7 +50,7 @@ El algoritmo insertion sort por su naturaleza tiene una complejidad algorítmica
 
 Con un problema de este estilo, no se puede suponer fallos y soluciones sin verificar toda la trazabilidad de lo que está sucediendo. Si se fuera a tomar soluciones como las que la secretaria de Salud propone, de directamente concluir que es el servidor, entonces eso reflejará perdidas monetarias y de tiempo mayores a las que se sufrían antes, no por la cantidad que se le agrego al servidor, sino por no analizar donde estaba exactamente el problema.
 
-Una vez, como programador, experimenté un problema similar al que sufre el software de Tamiza. Como practicante en un hospital tuve la oportunidad de apoyar en el proceso de pruebas de laboratorio, lo cual un bot de Python tenía un algoritmo para sacar las pruebas de laboratorio de todos los pacientes cada día a las 7 de la mañana. El hospital procesaba más de 50000 pruebas diarias, el algoritmo tardaba más tiempo del necesario cuando se necesitaba tener las listas antes de las 9 AM. El problema es que, si bien el algoritmo sacaba todas las pruebas y las mandaba a la base de datos correctamente, lo hacía muy lento y se pasaba de la hora incluso a mostrar datos a partir de las 12 PM, entonces a los doctores se les entregaban pruebas con datos que al final no reflejaban una correcta trazabilidad del paciente en el día anterior.
+Una vez, como programador, experimenté un problema similar al que sufre el Sortware de Tamiza. Como practicante en un hospital tuve la oportunidad de apoyar en el proceso de pruebas de laboratorio, lo cual un bot de Python tenía un algoritmo para sacar las pruebas de laboratorio de todos los pacientes cada día a las 7 de la mañana. El hospital procesaba más de 50000 pruebas diarias, el algoritmo tardaba más tiempo del necesario cuando se necesitaba tener las listas antes de las 9 AM. El problema es que, si bien el algoritmo sacaba todas las pruebas y las mandaba a la base de datos correctamente, lo hacía muy lento y se pasaba de la hora incluso a mostrar datos a partir de las 12 PM, entonces a los doctores se les entregaban pruebas con datos que al final no reflejaban una correcta trazabilidad del paciente en el día anterior.
 
 ---
 
@@ -60,7 +60,7 @@ Ya se vio en el punto anterior como una mala decisión, por no mirar todo el pun
 
 Ya tomamos en cuenta un impacto ambiental que puede sufrir por la mala implementación del algoritmo en la situación actual de la plataforma Tamiza. Ahora, diariamente se puede sufrir dentro de la organización de Salud por esa demora, ya que el algoritmo también puede llegar a fallar y dar datos incompletos que no se debería dejar pasar por alto. Existen varias personas afectadas por este error, pero se puede destacar principalmente a dos actores: el operador de centro de contacto y al paciente. Al necesitar de una lista incompleta y sin un orden hace que el personal de ese servicio trabaje de una forma muy desorganizada, con mala priorización y se seguro realizando trabajo no correspondiente a sus labores, esto sin contar probablemente quejas por partes de los pacientes y problemas internos por errores que se pueden cometer. Por otro lado, el paciente sufre excesivamente también por este error, y que si no se tiene una priorización correcta y por orden de quien debe ser atendido primero causa directamente que una persona no sea contactada a tiempo para su cita, y eso es un riesgo médico y grave que debe asumir el mismo paciente, ya que, de todas formas, no podrá ser atendido. Los tiempos de espera van a aumentar para las personas que realmente necesitan una atención más inmediata. Por algo más secundario, está la secretaria de Salud que tiene que realizar pagos excesivos y demás por la mala implementación de un algoritmo, y el equipo de desarrollo que debe trabajar tiempos extras resolviendo problemas relacionados también a dicho tema.
 
-Por todo lo anterior, y más allá del tiempo que el servidor va a gastar en la ejecución del algoritmo y el tiempo de más que la personas que trabajen en esa organización deben usar, se está hablando de un software médico, que son aplicativos más delicados con el funcionamiento que deben implementar. Al momento de que un algoritmo se demore más de lo que debería no solo es pérdida de dinero por parte de la empresa, por parte de los trabajadores con cosas extras que deben hacer, sino que directamente se está manejando un tema con la priorización de los pacientes. Hay pacientes que deben ser atendidos urgentemente, y tienen más problemas que otros, de ahí la priorización que se hace, entonces un error con la ejecución puede ser vital para una persona que debe ser atendida, eso es un fallo critico en el sistema de salud, y reglas de calidad que no se están cumpliendo.
+Por todo lo anterior, y más allá del tiempo que el servidor va a gastar en la ejecución del algoritmo y el tiempo de más que la personas que trabajen en esa organización deben usar, se está hablando de un Sortware médico, que son aplicativos más delicados con el funcionamiento que deben implementar. Al momento de que un algoritmo se demore más de lo que debería no solo es pérdida de dinero por parte de la empresa, por parte de los trabajadores con cosas extras que deben hacer, sino que directamente se está manejando un tema con la priorización de los pacientes. Hay pacientes que deben ser atendidos urgentemente, y tienen más problemas que otros, de ahí la priorización que se hace, entonces un error con la ejecución puede ser vital para una persona que debe ser atendida, eso es un fallo critico en el sistema de salud, y reglas de calidad que no se están cumpliendo.
 
 ---
 
@@ -72,9 +72,9 @@ Código de esta parte: [código de la Parte 3](parte3_casos.py)
 
 **Definición de casos** (implementadas mediante [`insertion_sort`](algoritmos.py) sobre los lotes generados en [`datos.py`](datos.py)):
 
-- **Mejor caso:** La mejor entrada para un algoritmo de Insertion Soft. Ocurre cuando la entrada de registros viene, en su gran mayoría, ya ordenado y solo habiendo que ordenar unos pocos registros. Entonces el trabajo es lineal por parte del ciclo externo, y el ciclo interno en mínimas ocasiones se ejecuta.
-- **Caso promedio:** Un caso donde los registros vienen de forma aleatorio, siendo este el caso más normal que se puede ocurrir. Teóricamente, viniendo los registros en promedio desordenados entonces dependiendo el tamaño n de entrada de datos tiene como consecuencia n/2 (la mitad) de veces que se ejecutaría el ciclo interno de Insertion Doft.
-- **Peor caso:** La peor entrada posible para un algoritmo de ordenamiento de Insertion Soft, ya que, el ordenamiento que se supone que debe tener los registros (digamos que de menor a mayor) tiene un orden inverso al que se supone que debería estar (quiere decir, de mayor a menor). Esto tiene como consecuencia que el algoritmo de ordenamiento deba recorrer toda la lista de registros en su ciclo externo y por cada elemento también deba recorrer el ciclo interno. Computacionalmente más caro y demorado que los otros dos casos.
+- **Mejor caso:** La mejor entrada para un algoritmo de Insertion Sort. Para un tamaño de entrada n, es el tiempo mínimo que tarda el algoritmo, considerando todas las posibles entradas de n elementos que puede recibir. Para Insertion Sort ocurre cuando la entrada ya viene en su gran mayoría, en un orden ideal, y solo hay que mover algunas registros. El ciclo externo se ejecuta siempre las n veces, pero el ciclo interno casi no entra, así que el trabajo es lineal.
+- **Caso promedio:** Un caso donde los registros vienen de forma aleatorio, siendo este el caso más normal que puede ocurrir. Para un tamaño de entrada n, es el tiempo esperado del algoritmo, promediando sobre todas las posibles entradas de n elementos. Para Insertion Sort esto corresponde a una entrada en orden aleatorio,y en promedio, cada elemento nuevo debe desplazarse contra la mitad de los elementos que ya se insertaron, o sea, el ciclo interno se ejecuta alrededor de n/2 veces por cada posición i.
+- **Peor caso:** La peor entrada posible para un algoritmo de ordenamiento de Insertion Sort. Para un tamaño de entrada n, es el tiempo máximo del algoritmo entre todas las posibles entradas de n elementos. Para Insertion Sort ocurre cuando la entrada llega en el orden contrario al que se necesita (orden inverso), entonces cada elemento nuevo debe compararse y desplazarse contra todos los elementos ya insertados, por lo que tanto el ciclo externo como el interno se ejecutan al máximo. Es el caso computacionalmente más caro de los tres.
 
 **¿Cuál caso usar para decidir si el algoritmo entra a producción?**
 
@@ -117,7 +117,7 @@ Código de esta parte: [código de la Parte 4](parte4_complejidad.py) (usa [`mer
 Nos ayuda a medir el tiempo que puede demorar la ejecución de un algoritmo. En este caso, dicho tiempo total se representa con T(n), siendo n una variable dependiente, que es el tamaño de la entrada de la lista, y es directamente proporcional al tiempo de ejecución. Tiene los siguientes elementos:
 
 - **2T(n/b):** T(n/b) se multiplica por dos porque es la cantidad de subproblemas que se dividirá el problema original. Esto quiero decir que, como el problema original (la lista a ordenar) será dividida en dos para ordenar sus partes por separados entonces por eso se debe multiplicar por dos. a = 2.
-- **T(n/2):** Ya sabemos que el problema para el caso de merge soft se va a dividir en 2, eso quiere decir que, cada subproblema tiene la mitad de tamaño que tendrá el problema original. Por eso n/2. b = 2.
+- **T(n/2):** Ya sabemos que el problema para el caso de merge Sort se va a dividir en 2, eso quiere decir que, cada subproblema tiene la mitad de tamaño que tendrá el problema original. Por eso n/2. b = 2.
 - **Θ(n):** Este representa el costo de unir todos los subproblemas de nuevo en el problema original (que se le llama "merge"). Como cada subproblema ya está ordenado, para volverlos a unir solo se requiere una pasada lineal sobre los n elementos, sin operaciones adicionales.
 
 **Resolución por el método de sustitución:**
@@ -134,6 +134,8 @@ Ahora se realiza la simplificación de la función:
 - Aplicamos la propiedad de los logaritmos que dice que (log(a/b) = loga – logb), y queda: T(n) ≤ cn(logn – log2) + cn
 - Como sabemos que log_2 2 = 1 entonces tenemos que: T(n) ≤ cn(logn – 1) + cn => T(n) ≤ cn logn – cn + cn
 - Se realiza la resta de los términos iguales: T(n) ≤ cn logn
+
+Esto demuestra que: si la hipótesis se cumple para un n/2, también se cumple para n. Pero falta el caso base, que es el que arranca todo, si tomamos un n inicial igual a 2, T(2) es una constante conocida: el costo de comparar y mezclar dos elementos. Basta elegir un c suficientemente grande para que T(2) ≤ c·2·log 2. Con el caso fijo con un n inicial igual a 2 y el paso ya demostrado, queda probado que T(n) ≤ c n log n para todo n ≥ n₀, es decir, T(n) = O(n log n).
 
 Resolviendo lo anterior, se puede notar que tiene la misma forma de la hipótesis que se realizó. Entonces queda demostrado que T(n) = O(n logn)
 
@@ -155,7 +157,13 @@ for i in range(1, len(arreglo)):         # c1, se ejecuta n veces
     arreglo[j + 1] = clave               # c10, se ejecuta n - 1 veces
 ```
 
-Sumando todos los términos agrupados, el tiempo total es:
+Sumando todos los términos agrupados, el tiempo total es: T(n) = c1·n + (c2 + c3 + c10)·(n − 1) + c9·(n − 1) + Σᵢ₌₁ⁿ⁻¹ [c4·(t_i + 1) + (c5 + c6 + c7 + c8)·t_i]
+
+A partir de esta expresión se resuelven los dos casos extremos:
+
+- **Mejor caso** (caso ideal para Tamiza): t_i = 0 para todo i, porque el while casi nunca entra a desplazar. Entonces la suma se reduce a términos constantes multiplicados por n, es decir, T(n) = Θ(n).
+- **Peor caso** (orden inverso, caso no ideal para Tamiza): t_i = i para cada i, porque cada elemento nuevo se tiene que comparar y desplazar contra todos los que ya están insertados. La suma Σᵢ₌₁ⁿ⁻¹ i = n(n−1)/2, que es del orden de n². Entonces T(n) = Θ(n²).
+
 
 **Complejidad algorítmica esperada:**
 
@@ -164,9 +172,9 @@ Sumando todos los términos agrupados, el tiempo total es:
 | Insertion sort | Θ(n) | Θ(n²) | Θ(n²) |
 | Merge sort | Θ(n log n) | Θ(n log n) | Θ(n log n) |
 
-Para el caso de insertion soft: En el Peor y Caso promedio se ve una complejidad de n**2 ya que en ambos casos se deben realizar los dos ciclos del agoritmo, por lo que es recorrido y desplazamiento, y para el Mejor Caso como en su mayoria ya está organizado entonces la ejecución es más que todo por recorrido entonces solo se ejecuta el ciclo externo y tiene complejidad de n.
+Para el caso de insertion Sort: En el Peor y Caso promedio se ve una complejidad de n**2 ya que en ambos casos se deben realizar los dos ciclos del agoritmo, por lo que es recorrido y desplazamiento, y para el Mejor Caso como en su mayoria ya está organizado entonces la ejecución es más que todo por recorrido entonces solo se ejecuta el ciclo externo y tiene complejidad de n.
 
-Para el caso de Merge Soft, la complejidad dependiendo del caso es indiferente, ya que al ser un algoritmo diferente no depende de la forma de la lista si no de la división que hace en los subproblemas y la organización, por lko que la complejidad en realidad nunca cambia.
+Para el caso de Merge Sort, la complejidad dependiendo del caso es indiferente, ya que al ser un algoritmo diferente no depende de la forma de la lista si no de la división que hace en los subproblemas y la organización, por lko que la complejidad en realidad nunca cambia.
 
 ### 4.2 Validación experimental
 
@@ -174,7 +182,7 @@ Para el caso de Merge Soft, la complejidad dependiendo del caso es indiferente, 
 
 **Conclusión para algoritmos en Tamiza:**
 
-A partir de la gráfica evidenciada se puede concluir que el mejor algoritmo para el software de Tamiza es Merge Sort. Al observar las curvas que se presentan a medida que crece la entrada n, la línea de Insert Sort comienza a ir hacía arriba de forma muy pronunciada, con un crecimiento excesivo, lo que evidencia la naturaleza de la complejidad algorítmica de n**2. En cambio, la línea de Merge Sort se mantiene bastante pegada y cercana a lo que es le eje X, lo que demuestra que apenas tiene un crecimiento perceptible a medida que el tamaño de la entrada n de la lista va creciendo. Para el 1.200.000 de registros que maneja Tamiza, el algoritmo que maneja mejor la cantidad de elementos y la ventana indiscutible de 4 horas es Merge Sort, a comparación de Insertion Sort que requiere un tiempo mucho mayor por la cantidad de la entrada, y hace que se genere los fallos ya mencionados.
+A partir de la gráfica evidenciada se puede concluir que el mejor algoritmo para el Sortware de Tamiza es Merge Sort. Al observar las curvas que se presentan a medida que crece la entrada n, la línea de Insert Sort comienza a ir hacía arriba de forma muy pronunciada, con un crecimiento excesivo, lo que evidencia la naturaleza de la complejidad algorítmica de n**2. En cambio, la línea de Merge Sort se mantiene bastante pegada y cercana a lo que es le eje X, lo que demuestra que apenas tiene un crecimiento perceptible a medida que el tamaño de la entrada n de la lista va creciendo. Para el 1.200.000 de registros que maneja Tamiza, el algoritmo que maneja mejor la cantidad de elementos y la ventana indiscutible de 4 horas es Merge Sort, a comparación de Insertion Sort que requiere un tiempo mucho mayor por la cantidad de la entrada, y hace que se genere los fallos ya mencionados.
 
 **Comprobación de complejidades en la sesión 4.1:**
 
