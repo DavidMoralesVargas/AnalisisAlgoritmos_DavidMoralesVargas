@@ -60,7 +60,7 @@ Excelente trabajo: un laboratorio completo, ordenado y bien sustentado con sus p
 - Hay cuatro commits del laboratorio con mensajes descriptivos.
 
 ## ¿El código funciona?
-Sí. Las pruebas pasan, ambas soluciones dan siempre la misma suma (también en mis pruebas adicionales con listas aleatorias) y la medición corre y genera la gráfica sin errores.
+Sí. Las pruebas pasan, ambas soluciones dan siempre la misma suma (también en listas aleatorias) y la medición corre y genera la gráfica sin errores.
 
 ## Para el próximo laboratorio
 - Borre los comentarios `TODO` de la plantilla cuando termine cada función.
